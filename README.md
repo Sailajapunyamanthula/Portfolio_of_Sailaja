@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Sailaja Punyamanthula, portfolio
 
 A dark, futuristic personal portfolio built with React, TypeScript, Tailwind CSS and Lucide icons.
@@ -81,3 +82,4 @@ To regenerate the social image after editing `design/og-image.svg`:
 - `prefers-reduced-motion` stops the particles, orb rotation and reveal animations.
 - Canvas animations pause when off-screen or when the tab is hidden.
 - About 74 KB of JavaScript (gzipped). Fonts load from Google Fonts with a system-font fallback.
+
