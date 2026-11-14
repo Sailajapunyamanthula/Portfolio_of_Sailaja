@@ -1,0 +1,222 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    background: #080b12;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-ink font-sans text-fg antialiased;
+    min-height: 100vh;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+
+  ::selection {
+    background: rgba(0, 229, 255, 0.28);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #00e5ff;
+    outline-offset: 3px;
+    border-radius: 0.5rem;
+  }
+
+  section:focus,
+  main:focus {
+    outline: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Frosted surface used by every card */
+  .glass {
+    background: linear-gradient(180deg, rgba(18, 26, 45, 0.62), rgba(13, 19, 34, 0.55));
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.04) inset,
+      0 22px 50px -26px rgba(0, 0, 0, 0.65);
+  }
+
+  /* Cursor-follow spotlight + glowing border. --mx / --my are set from JS. */
+  .spot {
+    position: relative;
+    isolation: isolate;
+  }
+  .spot::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(0, 229, 255, 0.1), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .spot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      280px circle at var(--mx, 50%) var(--my, 0%),
+      rgba(0, 229, 255, 0.6),
+      rgba(139, 92, 246, 0.38) 45%,
+      transparent 70%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .spot:hover::before,
+  .spot:hover::after,
+  .spot:focus-within::before,
+  .spot:focus-within::after {
+    opacity: 1;
+  }
+
+  .text-gradient {
+    background-image: linear-gradient(100deg, #00e5ff 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-gradient-hero {
+    background-image: linear-gradient(120deg, #ffffff 0%, #b8f5ff 42%, #c4b5fd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.055) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 25%, #000 25%, transparent 78%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 25%, #000 25%, transparent 78%);
+  }
+
+  /* Scroll reveal: small, quick, and skipped for reduced motion */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: var(--d, 0ms);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* The one orchestrated moment: hero entrance */
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+  .hero-in {
+    animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  @keyframes orb-in {
+    from {
+      opacity: 0;
+      transform: scale(0.86);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .orb-in {
+    animation: orb-in 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s both;
+  }
+
+  /* Data-flow dashes inside project art; they move on hover or when .running */
+  @keyframes dash {
+    to {
+      stroke-dashoffset: -28;
+    }
+  }
+  .flow-dash {
+    stroke-dasharray: 6 8;
+    animation: dash 1.4s linear infinite;
+    animation-play-state: paused;
+  }
+  .group:hover .flow-dash,
+  .group:focus-within .flow-dash,
+  .flow-dash.running {
+    animation-play-state: running;
+  }
+
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: -4rem;
+    z-index: 200;
+    padding: 0.6rem 1rem;
+    border-radius: 0.75rem;
+    background: #00e5ff;
+    color: #04121a;
+    font-weight: 600;
+    transition: top 0.2s;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  /* Placeholder styling for content the owner still needs to fill in */
+  .ph {
+    overflow-wrap: anywhere;
+    border: 1px dashed rgba(255, 255, 255, 0.22);
+    color: #8793ab;
+    font-style: italic;
+  }
+}

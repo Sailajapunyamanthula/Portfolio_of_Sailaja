@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00E5FF" />
+      <stop offset="1" stop-color="#8B5CF6" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8B5CF6" stop-opacity=".45" />
+      <stop offset=".6" stop-color="#00E5FF" stop-opacity=".08" />
+      <stop offset="1" stop-color="#080B12" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#94A3B8" stroke-opacity=".08" />
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#080B12" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <circle cx="900" cy="315" r="320" fill="url(#glow)" />
+
+  <g stroke="url(#g)" stroke-opacity=".45" stroke-width="1.4" fill="none">
+    <path d="M1070 315 L1020 215 L930 160 L830 170 L755 235 L740 330 L785 425 L865 470 L960 455 L1035 395 Z" />
+    <path d="M960 260 L850 300 L930 390 L1000 330 Z" />
+    <path d="M1020 215 L960 260 M830 170 L850 300 M755 235 L850 300 M785 425 L930 390 M960 455 L930 390 M1035 395 L1000 330 M1070 315 L1000 330 M930 160 L960 260" />
+  </g>
+  <g fill="url(#g)">
+    <circle cx="1070" cy="315" r="6" /><circle cx="1020" cy="215" r="7" /><circle cx="930" cy="160" r="6" />
+    <circle cx="830" cy="170" r="5" /><circle cx="755" cy="235" r="6" /><circle cx="740" cy="330" r="5" />
+    <circle cx="785" cy="425" r="7" /><circle cx="865" cy="470" r="5" /><circle cx="960" cy="455" r="6" />
+    <circle cx="1035" cy="395" r="5" /><circle cx="960" cy="260" r="9" /><circle cx="850" cy="300" r="8" />
+    <circle cx="930" cy="390" r="9" /><circle cx="1000" cy="330" r="7" />
+  </g>
+
+  <rect x="80" y="84" width="64" height="64" rx="16" fill="#080B12" />
+  <rect x="81.5" y="85.5" width="61" height="61" rx="14.5" fill="none" stroke="url(#g)" stroke-width="3" />
+  <text x="112" y="127" text-anchor="middle" font-family="Sora, Arial, Helvetica, sans-serif" font-weight="700" font-size="26" fill="url(#g)">SP</text>
+
+  <text x="80" y="300" font-family="Sora, Arial, Helvetica, sans-serif" font-size="76" font-weight="700" fill="#E7ECF5">Sailaja</text>
+  <text x="80" y="384" font-family="Sora, Arial, Helvetica, sans-serif" font-size="76" font-weight="700" fill="#E7ECF5">Punyamanthula</text>
+  <text x="80" y="448" font-family="Figtree, Arial, Helvetica, sans-serif" font-size="30" fill="#A3AEC5">Aspiring Software Developer | AI &amp; ML Enthusiast</text>
+  <rect x="80" y="486" width="140" height="3" rx="1.5" fill="url(#g)" />
+</svg>
